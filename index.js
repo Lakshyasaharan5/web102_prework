@@ -184,3 +184,24 @@ firstGameContainer.appendChild(firstGameElement);
 const secondGameElement = document.createElement("p");
 secondGameElement.innerHTML = secondGame.name;
 secondGameContainer.appendChild(secondGameElement);
+
+// searching for a game
+function searchGames() {
+    deleteChildElements(gamesContainer);
+
+    const searchValue = document.getElementById("search-input").value.toLowerCase();
+
+    // filter games by name
+    const filteredGames = GAMES_JSON.filter(game =>
+        game.name.toLowerCase().includes(searchValue)
+    );
+
+    addGamesToPage(filteredGames);
+}
+const searchBtn = document.getElementById("search-btn");
+searchBtn.addEventListener("click", searchGames);
+document.getElementById("search-input").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        searchGames();
+    }
+});
